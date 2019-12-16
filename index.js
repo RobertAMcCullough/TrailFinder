@@ -29,8 +29,18 @@ app.use(bodyParser.json())
 require('./routes/authRoutes')(app)
 require('./routes/trailRoutes')(app)
 
-app.get('/',(req,res)=>{
-    res.send('working')
-})
+//only runs in production mode/on heroku. Needs to come after express routes are defined
+if(process.env.NODE_ENV==='production'){
+    //have express serve up production assets like main.js or main.css files
+    //this has to go before the next line of code since the next line catches everything
+    //code says that if it doesn't know where a file is then check here:
+    app.use(express.static('client/build'))
+
+    //have express serve up html file if it doesn't recognize the route, has to be the last route handler listed because it catches everything that made it this far
+    const path = require('path')
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
+}
 
 app.listen(PORT)
