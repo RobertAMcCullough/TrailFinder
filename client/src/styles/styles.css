@@ -1,0 +1,90 @@
+.main-image {
+    height: 90vh;
+    background-image: url('../assets/naturePhoto1.jpg');
+    opacity: 75%;
+    background-size: auto;
+    z-index: 2;
+}
+
+.search-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 8px gray solid !important;
+    border-radius: 5px;
+    animation: moveInBottom .35s ease-out .75s;
+    animation-fill-mode: backwards;
+}
+
+@keyframes moveInBottom{
+    0% {
+        opacity: 0;
+        transform: translateY(2rem) translate(-50%, -50%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0) translate(-50%, -50%);
+    }
+}
+
+.search-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 64px;
+    z-index: 5;
+}
+
+.search-button:hover {
+    cursor: pointer;
+}
+
+.pointer-on-hover:hover {
+    cursor: pointer;
+}
+
+.main-container {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,white), color-stop(100%,#1A8D1A));
+    background: -webkit-linear-gradient(to right bottom, white, #1A8D1A 140%);
+    background:    -moz-linear-gradient(to right bottom, white, #1A8D1A 140%);
+    background:     -ms-linear-gradient(to right bottom, white, #1A8D1A 140%);
+    background:      -o-linear-gradient(to right bottom, white, #1A8D1A 140%);
+    background:         linear-gradient(to right bottom, white, #1A8D1A 140%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=white, endColorstr='#1A8D1A',gradientType=0 );
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.button-link {
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    /*optional*/
+    /* font-family: arial, sans-serif; */
+    /*input has OS specific font-family*/
+    color: #069;
+    /* text-decoration: underline; */
+    cursor: pointer;
+  }
+
+.enlarge-on-hover{
+    transition: all .25s !important;
+    z-index: 5;
+}
+
+.enlarge-on-hover:hover{
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+
+.button-hover{
+    transition: all .25s !important;
+}
+
+.button-hover:hover{
+    background: none !important;
+    transform: translateY(-2px);
+}
