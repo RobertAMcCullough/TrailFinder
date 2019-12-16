@@ -6,7 +6,7 @@ import LogInModal from './LogInModal'
 import SignUpModal from './SignUpModal'
 import UserAvatar from './UserAvatar'
 
-const logo ='https://i.imgur.com/efdCKOK.jpg'
+const logo = 'https://i.imgur.com/efdCKOK.jpg'
 // const logo = require('../assets/Logo.jpg')
 
 
