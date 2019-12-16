@@ -9,7 +9,8 @@ import DifficultyLabel from '../DifficultyLabel'
 import TodoCompleteButtons from '../TodoCompleteButtons'
 import Map from '../Map'
 
-import stockImage from '../../assets/naturePhoto2.jpg'
+const stockImage = 'https://i.imgur.com/TbzMxRA.jpg'
+// import stockImage from '../../assets/naturePhoto2.jpg'
 
 class TrailDetail extends React.Component {
     componentDidMount(){

@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-const defaultPhoto = require('../../assets/missing-avatar.png')
-
+const defaultPhoto = 'https://i.imgur.com/V5uVYsb.png'
+// const defaultPhoto = require('../../assets/missing-avatar.png')
 
 class Settings extends React.Component{
     state = {

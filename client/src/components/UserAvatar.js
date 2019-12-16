@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { Dropdown } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-const defaultPhoto = require('../assets/missing-avatar.png')
+const defaultPhoto = 'https://i.imgur.com/V5uVYsb.png'
+// const defaultPhoto = require('../../assets/missing-avatar.png')
 
 class UserAvatar extends React.Component{
     

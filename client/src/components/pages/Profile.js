@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-const defaultPhoto = require('../../assets/missing-avatar.png')
+const defaultPhoto = 'https://i.imgur.com/V5uVYsb.png'
+// const defaultPhoto = require('../../assets/missing-avatar.png')
 
 class Profile extends React.Component{
     componentDidMount(){

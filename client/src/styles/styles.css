@@ -1,6 +1,7 @@
 .main-image {
     height: 90vh;
-    background-image: url('../assets/naturePhoto1.jpg');
+    background-image: url('https://i.imgur.com/w83V3ca.jpg');
+    /* background-image: url('../assets/naturePhoto1.jpg'); */
     opacity: 75%;
     background-size: auto;
     z-index: 2;

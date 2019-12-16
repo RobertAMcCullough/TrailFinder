@@ -12,7 +12,8 @@ import { toggleWishlist, toggleComplete, infoWindow } from '../actions'
 import DifficultyLabel from './DifficultyLabel'
 import TodoCompleteButtons from './TodoCompleteButtons'
 
-import stockImage from '../assets/naturePhoto2.jpg'
+const stockImage = 'https://i.imgur.com/TbzMxRA.jpg'
+// import stockImage from '../assets/naturePhoto2.jpg'
 
 class TrailResultsList extends React.Component {
     //state stores id of trail with dimming effect (when hovering). null means none are dimmed
