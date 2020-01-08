@@ -13,6 +13,7 @@
     "react-scripts": "3.2.0",
     "redux": "^4.0.4",
     "redux-promise": "^0.6.0",
+    "request": "^2.88.0",
     "semantic-ui-react": "^0.88.1"
   },
   "scripts": {
