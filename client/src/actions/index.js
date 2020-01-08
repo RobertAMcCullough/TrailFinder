@@ -14,7 +14,7 @@ export const fetchUser = () => {
 
 //search for trails using search term
 export const searchTrails = async (term, num=10) => {
-    const googleData = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${term}&key=${process.env.REACT_APP_googleMapsAPIKey}`)
+    const googleData = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${term}&key=${process.env.REACT_APP_geocodingAPIKey}`)
 
     //occurs when google can't find location
     if(googleData.data.results.length===0){
@@ -26,7 +26,7 @@ export const searchTrails = async (term, num=10) => {
 
     const location = googleData.data.results[0].geometry.location
 
-    // used when testing to reduce number of google map requests
+    // // used when testing to reduce number of google map requests
     // const location = {
     //     lat: 38.856,
     //     lng: -104.781
