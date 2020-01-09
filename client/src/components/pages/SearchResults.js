@@ -10,7 +10,7 @@ class SearchResults extends React.Component {
 
     componentDidMount(){
         document.title = `Trail Finder | Search Results For ${this.searchTerm}`
-        this.props.searchTrails(this.searchTerm)
+        this.props.searchTrails()
     }
 
     render(){

@@ -13,31 +13,63 @@ export const fetchUser = () => {
 }
 
 //search for trails using search term
-export const searchTrails = async (term, num=10) => {
-    const googleData = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${term}&key=${process.env.REACT_APP_geocodingAPIKey}`)
+export const searchTrails = async (num=10) => {
+    
+    // // used when testing to reduce number of google map requests
+    //     const lat: 38.856,
+    //     const lng: -104.781
 
-    //occurs when google can't find location
-    if(googleData.data.results.length===0){
+    const status = localStorage.getItem('searchStatus')
+    const lat = localStorage.getItem('lat')
+    const lng = localStorage.getItem('lng')
+
+    if(status!=="OK"){
         return({
             payload: null,
             type: SEARCH_TRAILS
         })
     }
-
-    const location = googleData.data.results[0].geometry.location
-
-    // // used when testing to reduce number of google map requests
-    // const location = {
-    //     lat: 38.856,
-    //     lng: -104.781
-    // }
-    
-    const trailList = axios.get(`https://www.hikingproject.com/data/get-trails?lat=${location.lat}&lon=${location.lng}&maxResults=${num}&maxDistance=10&key=${process.env.REACT_APP_hikingProjectAPIKey}`)
+        
+    const trailList = axios.get(`https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${lng}&maxResults=${num}&maxDistance=10&key=${process.env.REACT_APP_hikingProjectAPIKey}`)
 
     return({
         payload: trailList,
         type: SEARCH_TRAILS
     })
+
+    //The following was used when a separate geocoding call was made, but this was changed since it creates API key security issues
+    // const googleData = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${term}&key=${process.env.REACT_APP_geocodingAPIKey}`)
+
+    // //occurs when google can't find location
+    // if(googleData.data.results.length===0){
+    //     return({
+    //         payload: null,
+    //         type: SEARCH_TRAILS
+    //     })
+    // }
+
+    // const location = googleData.data.results[0].geometry.location
+
+
+    // The following was one option for protecting the geocoding api key:
+    // //determines whether or not to use heroku's fixie plugin which provides a static ip address for the geocoding api key whitelist
+    // let googleData = []
+
+    // if(process.env.NODE_ENV==='development'){
+    //     console.log('running 1')
+    //     googleData = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${term}&key=${process.env.REACT_APP_geocodingAPIKey}`)
+    // }else{
+    //     console.log('running 2')
+
+    //     const fixieRequest = request.defaults({'proxy': process.env.FIXIE_URL})
+    //     fixieRequest(`https://maps.googleapis.com/maps/api/geocode/json?address=${term}&key=${process.env.REACT_APP_geocodingAPIKey}`, (req,res,body)=>{
+    //         console.log('got response:', body)
+    //     })
+    //     return({
+    //         payload: null,
+    //         type: SEARCH_TRAILS
+    //     })    
+    // }
 }
 
 //toggle whether trail is in wishlist array or not

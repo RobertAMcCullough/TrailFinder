@@ -1,4 +1,5 @@
 import React from 'react'
+import { GoogleApiWrapper  } from 'google-maps-react'
 
 import '../../styles/styles.css'
 
@@ -17,8 +18,18 @@ class Home extends React.Component {
 
     submitSearch = (e) => {
         e.preventDefault()
-        localStorage.setItem('searchTerm',this.state.searchTerm)
-        this.props.history.push('/trails')
+
+        //geocoding (aka getting lat and long based on search term) is done here
+        const geocoder = new window.google.maps.Geocoder()
+        geocoder.geocode({address: this.state.searchTerm}, (res, status)=>{
+            //store the search data on local storage so it isn't cleared when back arrow/refresh is pressed
+            localStorage.setItem('searchTerm', this.state.searchTerm)
+            localStorage.setItem('searchStatus', status)
+            localStorage.setItem('lat', res[0].geometry.location.lat())
+            localStorage.setItem('lng', res[0].geometry.location.lng())
+            this.props.history.push('/trails')
+        })
+
     }
 
     render(){
@@ -37,4 +48,4 @@ class Home extends React.Component {
     }
 }
 
-export default Home
+export default GoogleApiWrapper({apiKey:process.env.REACT_APP_googleMapsAPIKey})(Home)
