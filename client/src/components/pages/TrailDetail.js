@@ -112,7 +112,7 @@ class TrailDetail extends React.Component {
                                 <Rating icon='star' rating={Math.round(trail.stars)} maxRating={5}/> - {trail.stars} ({trail.starVotes} ratings)
                             </div>
                             <div className='six wide column middle aligned'>
-                                <TodoCompleteButtons trail={trail} user={this.props.user} redirectTo={'/trails/'+this.props.match.params.id} backgroundColor='white'/>
+                                <TodoCompleteButtons trail={trail} user={this.props.user} redirectTo={'/trails/'+this.props.match.params.id} buttonSize='small'/>
                             </div>
                         </div>
                         <div className='row'>

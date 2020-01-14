@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
     completed: [],
     username: String,
     password: String, //hashed and salted automatically by passport-local-mongoose
-    photo: String,
+    photo: {type: String, default: 'Enter Profile Photo URL'},
     dateCreated: {type: Date, default: Date.now()},
     location: {type: String, default: 'Unspecified'}
 })

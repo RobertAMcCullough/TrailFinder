@@ -1,6 +1,7 @@
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20')
-const FacebookStrategy = require('passport-facebook')
+// const FacebookStrategy = require('passport-facebook')
+const TwitterStrategy = require('passport-twitter')
 const LocalStrategy = require('passport-local')
 const keys = require('../config/keys')
 const mongoose = require('mongoose') //importing mongoose instead of User
@@ -46,15 +47,39 @@ passport.use(new GoogleStrategy({
     })
 }))
 
-//same as above google strategy, just for facebook
-passport.use(new FacebookStrategy({
-    clientID: keys.facebookAppId,
-    clientSecret: keys.facebookSecret,
-    callbackURL: '/auth/facebook/callback',
+// //same as above google strategy, just for facebook
+// passport.use(new FacebookStrategy({
+//     clientID: keys.facebookAppId,
+//     clientSecret: keys.facebookSecret,
+//     callbackURL: '/auth/facebook/callback',
+//     proxy:true,
+//     profileFields: ['id', 'displayName', 'name', 'picture.type(large)']
+// }, (accessToken, refreshToken, profile, done) => {
+//     User.findOne({facebookId: profile.id}, (err,user)=>{
+//         if(err){
+//             console.log('error:',err)
+//             done(err, null)
+//         }
+//         if(user){
+//             done(null, user)
+//         }
+//         if(!user){
+//             User.create({facebookId: profile.id, firstName: profile.name.givenName, lastName: profile.name.familyName, photo: profile.photos[0].value }, (err, data) => {
+//                 done(err, data)
+//             })
+//         }
+//     })
+// }))
+
+//same as above google strategy, just for twitter
+passport.use(new TwitterStrategy({
+    consumerKey: keys.twitterAppId,
+    consumerSecret: keys.twitterSecret,
+    callbackURL: '/auth/twitter/callback',
     proxy:true,
     profileFields: ['id', 'displayName', 'name', 'picture.type(large)']
 }, (accessToken, refreshToken, profile, done) => {
-    User.findOne({facebookId: profile.id}, (err,user)=>{
+    User.findOne({twitterId: profile.id}, (err,user)=>{
         if(err){
             console.log('error:',err)
             done(err, null)
@@ -63,7 +88,7 @@ passport.use(new FacebookStrategy({
             done(null, user)
         }
         if(!user){
-            User.create({facebookId: profile.id, firstName: profile.name.givenName, lastName: profile.name.familyName, photo: profile.photos[0].value }, (err, data) => {
+            User.create({twitterId: profile.id, firstName: profile.name.givenName, lastName: profile.name.familyName, photo: profile.photos[0].value }, (err, data) => {
                 done(err, data)
             })
         }

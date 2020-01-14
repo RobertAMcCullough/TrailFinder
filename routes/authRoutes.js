@@ -18,9 +18,13 @@ module.exports = app => {
     //what to do after auth is successful is put the passport.use(new GoogleStrategy()) as the second arg which takes the args as shown in the function. this is were a new user can be added to the database. then the third arg is the next thing to do after passport.authenticate (which is a middleware) is finished
     app.get('/auth/google/callback', passport.authenticate('google'), (req, res)=>{res.redirect('/')})
 
-    app.get('/auth/facebook', passport.authenticate('facebook')) //step 1 - redirects user to facebook
+    // app.get('/auth/facebook', passport.authenticate('facebook')) //step 1 - redirects user to facebook
 
-    app.get('/auth/facebook/callback', passport.authenticate('facebook'), (req, res)=>{res.redirect('/')}) //step 2 - facebook redirects 
+    // app.get('/auth/facebook/callback', passport.authenticate('facebook'), (req, res)=>{res.redirect('/')}) //step 2 - facebook redirects 
+
+    app.get('/auth/twitter', passport.authenticate('twitter')) //step 1 - redirects user to facebook
+
+    app.get('/auth/twitter/callback', passport.authenticate('twitter'), (req, res)=>{res.redirect('/')}) //step 2 - facebook redirects 
 
     app.get('/api/logout', (req,res) => {
         req.logout() //a function attached by passport that removes cookie

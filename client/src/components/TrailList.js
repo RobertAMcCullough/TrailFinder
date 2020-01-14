@@ -104,7 +104,7 @@ class TrailResultsList extends React.Component {
                                 <Rating icon='star' rating={Math.round(trail.stars)} maxRating={5}/> - {trail.stars} ({trail.starVotes} ratings)
                             </div>
                             <div style={{maxWidth:'300px', marginLeft:'-15px'}}>
-                                <TodoCompleteButtons trail={trail} user={this.props.user} redirectTo={'/trails/'+this.props.match.params.id} backgroundColor='white'/>
+                                <TodoCompleteButtons trail={trail} user={this.props.user} redirectTo={'/trails/'+this.props.match.params.id} buttonSize='small'/>
                             </div>
                         </div>
                     </div>
