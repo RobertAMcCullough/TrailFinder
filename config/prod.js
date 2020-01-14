@@ -5,5 +5,7 @@ module.exports = {
     googleClientSecret: process.env.googleClientSecret,
     cookieKey: process.env.cookieKey,
     facebookAppId: process.env.facebookAppId,
-    facebookSecret: process.env.facebookSecret
+    facebookSecret: process.env.facebookSecret,
+    twitterAppId: process.env.twitterAppId,
+    twitterSecret: process.env.twitterSecret
 }
