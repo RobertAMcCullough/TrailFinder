@@ -1,7 +1,7 @@
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20')
 // const FacebookStrategy = require('passport-facebook')
-const TwitterStrategy = require('passport-twitter')
+const TwitterStrategy = require('passport-twitter').Strategy
 const LocalStrategy = require('passport-local')
 const keys = require('../config/keys')
 const mongoose = require('mongoose') //importing mongoose instead of User
@@ -70,30 +70,34 @@ passport.use(new GoogleStrategy({
 //         }
 //     })
 // }))
-
+ 
 //same as above google strategy, just for twitter
 passport.use(new TwitterStrategy({ 
     consumerKey: keys.twitterAppId,
     consumerSecret: keys.twitterSecret,
     callbackURL: '/auth/twitter/callback',
-    proxy: true
-    // profileFields: ['id', 'displayName', 'name', 'picture.type(large)']
+    proxy: true,
+    profileFields: ['id', 'displayName', 'name']
 }, (accessToken, refreshToken, profile, done) => {
-    // User.findOne({twitterId: profile.id}, (err,user)=>{
-    //     if(err){
-    //         console.log('error:',err)
-    //         done(err, null)
-    //     }
-    //     if(user){
-    //         done(null, user)
-    //     }
-    //     if(!user){
-    //         User.create({twitterId: profile.id, firstName: profile.name.givenName, lastName: profile.name.familyName, photo: profile.photos[0].value }, (err, data) => {
-    //             done(err, data)
-    //         })
-    //     }
-    // })
-    console.log('twitter login works. profile:', profile)
+    User.findOne({twitterId: profile.id}, (err,user)=>{
+        console.log(profile)
+        if(err){
+            console.log('error:',err)
+            done(err, null)
+        }
+        if(user){
+            done(null, user)
+        }
+        if(!user){
+            //this removes the string "_normal" from the photo url and makes the image bigger
+            let photoArray = profile.photos[0].value.split('_normal')
+            console.log('here!!!!!!!!',photoArray)
+            let photoString = photoArray[0]+photoArray[1]
+            User.create({twitterId: profile.id, firstName: profile.displayName.split(' ')[0], photo: photoString}, (err, data) => {
+                done(err, data)
+            })
+        }
+    })
 }))
 
 passport.use(new LocalStrategy(User.authenticate()))
