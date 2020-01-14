@@ -72,27 +72,28 @@ passport.use(new GoogleStrategy({
 // }))
 
 //same as above google strategy, just for twitter
-passport.use(new TwitterStrategy({
+passport.use(new TwitterStrategy({ 
     consumerKey: keys.twitterAppId,
     consumerSecret: keys.twitterSecret,
     callbackURL: '/auth/twitter/callback',
-    proxy:true,
-    profileFields: ['id', 'displayName', 'name', 'picture.type(large)']
+    proxy: true
+    // profileFields: ['id', 'displayName', 'name', 'picture.type(large)']
 }, (accessToken, refreshToken, profile, done) => {
-    User.findOne({twitterId: profile.id}, (err,user)=>{
-        if(err){
-            console.log('error:',err)
-            done(err, null)
-        }
-        if(user){
-            done(null, user)
-        }
-        if(!user){
-            User.create({twitterId: profile.id, firstName: profile.name.givenName, lastName: profile.name.familyName, photo: profile.photos[0].value }, (err, data) => {
-                done(err, data)
-            })
-        }
-    })
+    // User.findOne({twitterId: profile.id}, (err,user)=>{
+    //     if(err){
+    //         console.log('error:',err)
+    //         done(err, null)
+    //     }
+    //     if(user){
+    //         done(null, user)
+    //     }
+    //     if(!user){
+    //         User.create({twitterId: profile.id, firstName: profile.name.givenName, lastName: profile.name.familyName, photo: profile.photos[0].value }, (err, data) => {
+    //             done(err, data)
+    //         })
+    //     }
+    // })
+    console.log('twitter login works. profile:', profile)
 }))
 
 passport.use(new LocalStrategy(User.authenticate()))
