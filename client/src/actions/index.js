@@ -30,7 +30,10 @@ export const searchTrails = async (num=10) => {
         })
     }
         
-    const trailList = axios.get(`https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${lng}&maxResults=${num}&maxDistance=10&key=${process.env.REACT_APP_hikingProjectAPIKey}`)
+    const trailList = await axios.get(`https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${lng}&maxResults=${num}&maxDistance=10&key=${process.env.REACT_APP_hikingProjectAPIKey}`)
+    
+    //prevents screen that says "no results for..." for several seconds after doing a second search, when the first search had no results
+    trailList.data.trails.length===0 ? localStorage.setItem('trailResults','false') : localStorage.setItem('trailResults','true')
 
     return({
         payload: trailList,

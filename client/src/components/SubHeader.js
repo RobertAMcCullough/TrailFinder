@@ -18,7 +18,7 @@ class SubHeader extends React.Component {
         ]
 
         return(
-            <Dropdown placeholder='Number of Results' selection options={options} onChange={(e, data)=>this.props.searchTrails(localStorage.getItem('searchTerm'), data.value)}/>
+            <Dropdown placeholder='Number of Results' selection options={options} onChange={(e, data)=>this.props.searchTrails(data.value)}/>
         )
     }
 

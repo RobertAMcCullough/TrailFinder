@@ -147,7 +147,7 @@ class TrailDetail extends React.Component {
             </div>
             <div className='six wide column'>
                 <div className='row'>
-                    <a className='ui button enlarge-on-hover' style={{color:'white', backgroundColor:'#1A8D1A', marginBottom:'1rem'}} href={`https://www.google.com/maps/dir/?api=1&destination=${trail.latitude},${trail.longitude}`}><i className='ui icon location arrow'></i>Get Directions</a>
+                    <a className='ui button enlarge-on-hover' style={{color:'white', backgroundColor:'#1A8D1A', marginBottom:'1rem'}} target="_blank" href={`https://www.google.com/maps/dir/?api=1&destination=${trail.latitude},${trail.longitude}`}><i className='ui icon location arrow'></i>Get Directions</a>
                 </div>
                 <div className='row'>
                     <Map trails={[this.props.trail]}/>

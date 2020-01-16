@@ -23,6 +23,7 @@ class Header extends React.Component {
         }else{
             return(
                 <>
+                    <Link className='ui item button-hover' to='/' style={{fontSize:'1.15rem', backgroundColor:'none'}}><i className='plus icon' style={{color:'black'}}></i>New Search</Link>
                     <Link className='ui item button-hover' to='/favorites' style={{fontSize:'1.15rem', backgroundColor:'none'}}><i className='heart icon' style={{color:'red'}}></i>Favorites</Link>
                     <Link className='ui item button-hover' to='/completed' style={{fontSize:'1.15rem', backgroundColor:'none'}}><i className='check circle icon' style={{color:'green'}}></i>Completed</Link>
                     <UserAvatar/>

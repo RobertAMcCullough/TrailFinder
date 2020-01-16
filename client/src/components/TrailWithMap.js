@@ -4,7 +4,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Grid, Sticky } from 'semantic-ui-react'
 // import { Grid, Sticky, Pagination } from 'semantic-ui-react'
-import { extendedInfo } from '../actions'
+import { extendedInfo, refreshMap } from '../actions'
 
 import TrailList from './TrailList'
 import Map from './Map'
@@ -33,7 +33,7 @@ class TrailWithMap extends React.Component {
     renderExtendedInfoButton(){
         if(this.props.showExtendedInfo){
             return(
-                <div className='ui button enlarge-on-hover' style={{color:'white', backgroundColor:'#1A8D1A'}} onClick={()=>this.props.extendedInfo(false)}><i className='ui icon map'></i>Show Map</div>
+                <div className='ui button enlarge-on-hover' style={{color:'white', backgroundColor:'#1A8D1A'}} onClick={()=>{this.props.refreshMap(true);this.props.extendedInfo(false)}}><i className='ui icon map'></i>Show Map</div>
             )
         }else{
             return(
@@ -84,4 +84,4 @@ const mapStateToProps = state => {
     })
 }
 
-export default connect(mapStateToProps,{extendedInfo})(TrailWithMap)
+export default connect(mapStateToProps,{extendedInfo, refreshMap})(TrailWithMap)

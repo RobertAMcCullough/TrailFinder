@@ -1,5 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { GoogleApiWrapper  } from 'google-maps-react'
+
+import { refreshMap } from '../../actions'
 
 import '../../styles/styles.css'
 
@@ -19,14 +22,23 @@ class Home extends React.Component {
     submitSearch = (e) => {
         e.preventDefault()
 
+        //this makes sure the map is rerendered on subsequent searches, otherwise it will be centered on the last search
+        this.props.refreshMap(true)
+
         //geocoding (aka getting lat and long based on search term) is done here
         const geocoder = new window.google.maps.Geocoder()
         geocoder.geocode({address: this.state.searchTerm}, (res, status)=>{
             //store the search data on local storage so it isn't cleared when back arrow/refresh is pressed
             localStorage.setItem('searchTerm', this.state.searchTerm)
             localStorage.setItem('searchStatus', status)
-            localStorage.setItem('lat', res[0].geometry.location.lat())
-            localStorage.setItem('lng', res[0].geometry.location.lng())
+            if(status==='OK'){ //prevents error if google cannot find a location associated with search term
+                localStorage.setItem('lat', res[0].geometry.location.lat())
+                localStorage.setItem('lng', res[0].geometry.location.lng())
+                //prevents screen that says "no results for..." for several seconds after doing a second search, when the first search had no results
+                localStorage.setItem('geocodingResults','true')
+            }else{
+                localStorage.setItem('geocodingResults','false')
+            }
             this.props.history.push('/trails')
         })
 
@@ -48,4 +60,4 @@ class Home extends React.Component {
     }
 }
 
-export default GoogleApiWrapper({apiKey:process.env.REACT_APP_googleMapsAPIKey})(Home)
+export default connect(null,{ refreshMap })(GoogleApiWrapper({apiKey:process.env.REACT_APP_googleMapsAPIKey})(Home))

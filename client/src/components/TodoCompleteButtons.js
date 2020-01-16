@@ -93,9 +93,9 @@ class TodoCompleteButtons extends React.Component {
                 //localstorage item 'redirectTo' will store the page to redirect to after logging in or signing up, if not on home page
                 <div onClick={()=>{this.props.openModal('login',true); localStorage.setItem('redirectTo',this.props.redirectTo)}}>
                     <div className={this.backgroundClass} style={this.backgroundStyle}>
-                        <div style = {{width:'100%', padding:'11px 0'}}>
+                        <div style = {{width:'100%', padding:'5px 0'}}>
                             <i className='plus icon'></i>
-                            Login to add to list
+                            Log in to add to list
                         </div>
                     </div>
                 </div>

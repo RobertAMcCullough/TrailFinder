@@ -14,12 +14,22 @@ class SearchResults extends React.Component {
     }
 
     render(){
-        if(!this.props.trails) return(
-            <div style={{textAlign:'center'}}>
-                <h1 style={{marginTop:'4rem', textTransform:'capitalize'}}>No trails found near {this.searchTerm}</h1>
-                <Link to='/' style={{fontSize:'1.2rem'}}>Search again?</Link>
-            </div>
-        )
+        if(!this.props.trails){
+            //this if statement prevents "no trail results for ..." for a second when making a second search if the previous one returned no results
+            if(localStorage.getItem('geocodingResults')==='false' || localStorage.getItem('trailResults')==='false'){
+                return(
+                    <div style={{textAlign:'center'}}>
+                        <h1 style={{marginTop:'4rem', textTransform:'capitalize'}}>No trails found near {this.searchTerm}</h1>
+                        <Link to='/' style={{fontSize:'1.2rem'}}>Search again?</Link>
+                    </div>
+                )  
+            }else{
+                return(
+                    <h3>Loading...</h3>
+                )
+            }
+ 
+        }
         return(
             <div>
                 <TrailWithMap trails={this.props.trails} headerContent={`Trails Near ${this.searchTerm}`} addDropdown={true}/>             

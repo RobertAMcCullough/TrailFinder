@@ -90,9 +90,12 @@ passport.use(new TwitterStrategy({
         }
         if(!user){
             //this removes the string "_normal" from the photo url and makes the image bigger
-            let photoArray = profile.photos[0].value.split('_normal')
-            console.log('here!!!!!!!!',photoArray)
-            let photoString = photoArray[0]+photoArray[1]
+            let photoString = profile.photos[0].value
+            if(profile.photos[0].value.includes('_normal')){
+                let photoArray = profile.photos[0].value.split('_normal')
+                photoString = photoArray[0]+photoArray[1]
+            }
+
             User.create({twitterId: profile.id, firstName: profile.displayName.split(' ')[0], photo: photoString}, (err, data) => {
                 done(err, data)
             })
