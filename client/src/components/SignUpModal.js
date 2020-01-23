@@ -19,7 +19,7 @@ class SignUpModal extends React.Component {
                             <h1>Sign Up</h1>
                             <p>Welcome. Sign up below.</p>
                             <a className="ui primary button google" href='/auth/google' style={{margin:'10px 5px auto auto', width:'100%', backgroundColor:'#D3472C'}}><i className="google icon"/>Sign up with Google</a>
-                            <a className="ui primary button facebook" href='/auth/facebook' style={{margin:'10px 5px auto auto', width:'100%', backgroundColor:'#3D64A5'}}><i className="facebook icon"/>Sign up with Facebook</a>
+                            {/* <a className="ui primary button facebook" href='/auth/facebook' style={{margin:'10px 5px auto auto', width:'100%', backgroundColor:'#3D64A5'}}><i className="facebook icon"/>Sign up with Facebook</a> */}
                             <a className="ui primary button twitter" href='/auth/twitter' style={{margin:'10px 5px auto auto', width:'100%', backgroundColor:'##1DA1F2'}}><i className="twitter icon"/>Sign up with Twitter</a>
                             <div className='ui horizontal divider'>OR</div>
                             <form className='ui form' method='post' action='/auth/signup' autoComplete='off'>
