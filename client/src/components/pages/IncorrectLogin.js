@@ -7,7 +7,7 @@ class IncorrectLogin extends React.Component{
     render(){
         return(
             <div>
-                Incorrect username and password. Please click <button className='button-link' onClick={()=>this.props.openModal('login',true)}>here</button> to try again.
+                Incorrect username or password. Please click <button className='button-link' onClick={()=>this.props.openModal('login',true)}>here</button> to try again.
             </div>
         )
     }

@@ -7,7 +7,6 @@ const cookieSession = require('cookie-session')
 require('./models/Users') //importing this here since using an alternative import statement in the passport file for importing model files could throw errors when testing
 require('./services/passport') //don't need to asign to a variable since there is no exported code, just code that needs to run once
 
-
 const keys = require('./config/keys')
 
 const PORT = process.env.PORT || 5000
