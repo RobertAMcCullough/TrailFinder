@@ -8,5 +8,6 @@ export const OPEN_MODAL = 'OPEN_MODAL'
 export const REFRESH_MAP = 'REFRESH_MAP'
 export const INFO_WINDOW = 'INFO_WINDOW'
 export const EXTENDED_INFO = 'EXTENDED_INFO'
+export const SCREEN_RESIZE = 'SCREEN_RESIZE'
 
 

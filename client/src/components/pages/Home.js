@@ -1,10 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { GoogleApiWrapper  } from 'google-maps-react'
+import { GoogleApiWrapper } from 'google-maps-react'
 
 import { refreshMap } from '../../actions'
 
 import '../../styles/styles.css'
+
+import breakPoints from '../../config/breakPoints'
 
 class Home extends React.Component {
     state = {searchTerm : ''}
@@ -25,7 +27,7 @@ class Home extends React.Component {
         //this makes sure the map is rerendered on subsequent searches, otherwise it will be centered on the last search
         this.props.refreshMap(true)
 
-        //geocoding (aka getting lat and long based on search term) is done here
+        //geocoding (getting lat and long based on search term) is done here
         const geocoder = new window.google.maps.Geocoder()
         geocoder.geocode({address: this.state.searchTerm}, (res, status)=>{
             //store the search data on local storage so it isn't cleared when back arrow/refresh is pressed
@@ -44,20 +46,39 @@ class Home extends React.Component {
 
     }
 
+    renderWarning = () => {
+        if(this.props.screenSize < breakPoints.large){
+            return(
+                <div className='warning'>This website is not yet customized for mobile devices. Please view on a computer for best results.</div>
+            )
+        }
+    }
+
     render(){
         return(
-            <div className='main-image'>
-                <form className="search-box" onSubmit={e=>this.submitSearch(e)}>
-                    <div className="ui massive icon input">
-                        <input type="text" placeholder="Enter Location..." value={this.state.searchTerm} onChange={e=>this.setState({searchTerm:e.target.value})}/>
-                            <i className="search icon"></i>
-                            {/* the following div is just an overlay to make the search icon clickable */}
-                            <div className='search-button' onClick={e=>this.submitSearch(e)}></div>
-                    </div>
-                </form>
+            <div>
+                <div>
+                    {this.renderWarning()}
+                </div>
+                <div className='main-image'>
+                    <form className="search-box" onSubmit={e=>this.submitSearch(e)}>
+                        <div className="ui massive icon input">
+                            <input type="text" placeholder="Enter Search Location..." value={this.state.searchTerm} onChange={e=>this.setState({searchTerm:e.target.value})}/>
+                                <i className="search icon"></i>
+                                {/* the following div is just an overlay to make the search icon clickable */}
+                                <div className='search-button' onClick={e=>this.submitSearch(e)}></div>
+                        </div>
+                    </form>
+                </div>
             </div>
         )
     }
 }
 
-export default connect(null,{ refreshMap })(GoogleApiWrapper({apiKey:process.env.REACT_APP_googleMapsAPIKey})(Home))
+const mapStateToProps = (state) => {
+    return({
+        screenSize: state.screenSize
+    })
+}
+
+export default connect(mapStateToProps,{ refreshMap })(GoogleApiWrapper({apiKey:process.env.REACT_APP_googleMapsAPIKey})(Home))

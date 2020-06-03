@@ -41,6 +41,7 @@ class MapContainer extends React.Component {
         
         //don't need to run the following code if it was run in componentDidMount
         if(this.mapRendered===false || this.props.redoMap===true){
+            this.mapRendered=true;
             this.props.refreshMap(false) //this makes sure the map isn't refreshed again a second time
             this.renderMap()
         }

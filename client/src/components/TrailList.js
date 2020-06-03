@@ -77,9 +77,9 @@ class TrailResultsList extends React.Component {
                 {this.renderImage(e)}
                 <div className='center aligned content'>
                     <Link to={`/trails/${e.id}`} style={{color:'black'}} className='header'>{`${ind+1}. ${e.name}`}</Link>
-                    <div className='description'>
+                    <Link to={`/trails/${e.id}`} style={{color:'black', marginTop:'.5em', display:'block'}}  className='description'>
                         <Rating icon='star' rating={Math.round(e.stars)} maxRating={5}/> - {e.length.toString().length===1 ? `${e.length}.0` : e.length} Miles
-                    </div>
+                    </Link>
                 </div>
                 <TodoCompleteButtons trail={e} user={this.props.user} redirectTo='/trails'/>
             </div>

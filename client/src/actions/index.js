@@ -1,6 +1,14 @@
 import axios from 'axios'
 
-import { FETCH_USER, SEARCH_TRAILS, TOGGLE_WISHLIST, TOGGLE_COMPLETE, SORT_TRAILS, FETCH_TRAIL, OPEN_MODAL, REFRESH_MAP, INFO_WINDOW, EXTENDED_INFO } from './types'
+import { FETCH_USER, SEARCH_TRAILS, TOGGLE_WISHLIST, TOGGLE_COMPLETE, SORT_TRAILS, FETCH_TRAIL, OPEN_MODAL, REFRESH_MAP, INFO_WINDOW, EXTENDED_INFO, SCREEN_RESIZE } from './types'
+
+//stores the width of the current display in pixels for use in responsive components
+export const screenResize = width => {
+    return({
+        type: SCREEN_RESIZE,
+        payload: width
+    })
+}
 
 //get currently logged in user
 export const fetchUser = () => {
@@ -40,7 +48,7 @@ export const searchTrails = async (num=10) => {
         type: SEARCH_TRAILS
     })
 
-    //The following was used when a separate geocoding call was made, but this was changed since it creates API key security issues
+    //The following was used when a separate geocoding call was made, but this was changed since it creates API key security issues. The following call will not work with http restrictions (only IP)
     // const googleData = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${term}&key=${process.env.REACT_APP_geocodingAPIKey}`)
 
     // //occurs when google can't find location
@@ -59,14 +67,11 @@ export const searchTrails = async (num=10) => {
     // let googleData = []
 
     // if(process.env.NODE_ENV==='development'){
-    //     console.log('running 1')
     //     googleData = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${term}&key=${process.env.REACT_APP_geocodingAPIKey}`)
     // }else{
-    //     console.log('running 2')
 
     //     const fixieRequest = request.defaults({'proxy': process.env.FIXIE_URL})
     //     fixieRequest(`https://maps.googleapis.com/maps/api/geocode/json?address=${term}&key=${process.env.REACT_APP_geocodingAPIKey}`, (req,res,body)=>{
-    //         console.log('got response:', body)
     //     })
     //     return({
     //         payload: null,

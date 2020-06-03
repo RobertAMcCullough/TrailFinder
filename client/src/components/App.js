@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter, Route} from 'react-router-dom'
 
-import { fetchUser } from '../actions'
+import { fetchUser, screenResize } from '../actions'
 
 import Header from './Header'
 import Home from './pages/Home'
@@ -18,7 +18,13 @@ import About from './pages/About'
 
 class App extends React.Component {
     componentDidMount(){
+        //updates state when window is resized
+        window.addEventListener('resize', ()=>{
+            this.props.screenResize(window.innerWidth)
+        })
+
         this.props.fetchUser()
+        this.props.screenResize(window.innerWidth)
     }
 
     render(){
@@ -49,4 +55,4 @@ const mapStateToProps = (state) => {
     })
 }
 
-export default connect(mapStateToProps, {fetchUser})(App)
+export default connect(mapStateToProps, {fetchUser, screenResize})(App)

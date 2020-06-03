@@ -8,6 +8,7 @@ import openModal from './openModal'
 import refreshMap from './refreshMap'
 import infoWindow from './infoWindow'
 import extendedInfo from './extendedInfo'
+import screenResize from './screenResize'
 
 export default combineReducers({
     currentUser: fetchUser,
@@ -17,5 +18,6 @@ export default combineReducers({
     openModal: openModal,
     refreshMap: refreshMap,
     infoWindow: infoWindow,
-    extendedInfo: extendedInfo
+    extendedInfo: extendedInfo,
+    screenSize: screenResize
 })

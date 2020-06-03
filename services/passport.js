@@ -80,7 +80,6 @@ passport.use(new TwitterStrategy({
     profileFields: ['id', 'displayName', 'name']
 }, (accessToken, refreshToken, profile, done) => {
     User.findOne({twitterId: profile.id}, (err,user)=>{
-        console.log(profile)
         if(err){
             console.log('error:',err)
             done(err, null)
