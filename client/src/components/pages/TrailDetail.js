@@ -122,19 +122,22 @@ class TrailDetail extends React.Component {
                         </div>
                         <div className='row'>
                             <div className='four wide column'>
-                                <img src="https://cdn.apstatic.com/img/trailStats/hike.svg" style={this.iconStyles} alt='Trail Icon'></img><span style={this.labelStyles}>Trail</span>
+                                <i className='ui icon map outline' style={{marginRight:'0rem'}}></i><span style={this.labelStyles}>Trail</span>
+                                {/* <img src="https://cdn.apstatic.com/img/trailStats/hike.svg" style={this.iconStyles} alt='Trail Icon'></img><span style={this.labelStyles}>Trail</span> */}
                                 <p style={this.detailStyles}><span style={{fontWeight:'bold'}}>{trail.length.toString().length===1 ? `${trail.length}.0` : trail.length}</span> miles</p>
                                 <p style={this.detailStyles2}>{this.getDifficulty()}</p>
                             </div>
                             <div className='four wide column'>
-                                <img src="https://cdn.apstatic.com/img/trailStats/elevationGain.svg" style={this.iconStyles} alt='Elevation Icon'></img><span style={this.labelStyles}>Elevation</span>
+                                <i className='ui icon arrows alternate vertical' style={{marginRight:'0rem'}}></i><span style={this.labelStyles}>Elevation</span>
+                                {/* <img src="https://cdn.apstatic.com/img/trailStats/elevationGain.svg" style={this.iconStyles} alt='Elevation Icon'></img><span style={this.labelStyles}>Elevation</span> */}
                                 <p style={this.detailStyles}>Ascent: <span style={{fontWeight:'bold'}}>{trail.ascent}'</span></p>
                                 <p style={this.detailStyles2}>Descent: <span style={{fontWeight:'bold'}}>{trail.descent}'</span></p>
                                 <p style={this.detailStyles2}>High: <span style={{fontWeight:'bold'}}>{trail.high}'</span></p>
                                 <p style={this.detailStyles2}>Low: <span style={{fontWeight:'bold'}}>{trail.low}'</span></p>
                             </div>
                             <div className='four wide column'>
-                                <img src="https://cdn.apstatic.com/img/trailStats/upDownArrows.svg" style={this.iconStyles} alt='Up/Down Icon'></img><span style={this.labelStyles}>Grade</span>
+                                <i className='ui icon chart line' style={{marginRight:'0rem'}}></i><span style={this.labelStyles}>Grade</span>
+                                {/* <img src="https://cdn.apstatic.com/img/trailStats/upDownArrows.svg" style={this.iconStyles} alt='Up/Down Icon'></img><span style={this.labelStyles}>Grade</span> */}
                                 <p style={this.detailStyles}>Avg Grade: <span style={{fontWeight:'bold'}}>{this.calcGrade().avg}%</span></p>
                                 <p style={this.detailStyles2}>Max Grade: <span style={{fontWeight:'bold'}}>{this.calcGrade().max}%</span></p>
                             </div>
