@@ -15,6 +15,9 @@ mongoose.connect(keys.dbURL, {useNewUrlParser: true, useUnifiedTopology: true})
 
 const app = express()
 
+//initialize aws xray sdk - must install the xray daemon on machine for this to work
+const AWSXRay = require('aws-xray-sdk')
+
 app.use(cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000, //30 days in mS
     keys: [keys.cookieKey] //random key for encrypting id into cookie
@@ -23,12 +26,14 @@ app.use(passport.initialize())
 app.use(passport.session())
 // app.use(bodyParser.urlencoded({extended:true})) //need this for un/pw form data to work - include as middleware in route
 app.use(bodyParser.json())
+//this must be added before routes
+app.use(AWSXRay.express.openSegment('TrailFinder'))
 
 
 require('./routes/authRoutes')(app)
 require('./routes/trailRoutes')(app)
 
-//only runs in production mode/on heroku. Needs to come after express routes are defined
+//only runs in production mode/on heroku or AWS. Needs to come after express routes are defined
 if(process.env.NODE_ENV==='production'){
     //have express serve up production assets like main.js or main.css files
     //this has to go before the next line of code since the next line catches everything
@@ -41,5 +46,8 @@ if(process.env.NODE_ENV==='production'){
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     })
 }
+
+//this must be added after routes
+app.use(AWSXRay.express.closeSegment())
 
 app.listen(PORT)
