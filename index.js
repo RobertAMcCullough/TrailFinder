@@ -11,12 +11,14 @@ const keys = require('./config/keys')
 
 const PORT = process.env.PORT || 5000
 
-mongoose.connect(keys.dbURL, {useNewUrlParser: true, useUnifiedTopology: true})
+console.log('connecting to ' + keys.dbURL)
+
+mongoose.connect(keys.dbURL, {useNewUrlParser: true, useUnifiedTopology: true}).catch(error=>console.log('ERROR! '+error))
 
 const app = express()
 
 //initialize aws xray sdk - must install the xray daemon on machine for this to work
-const AWSXRay = require('aws-xray-sdk')
+// const AWSXRay = require('aws-xray-sdk')
 
 app.use(cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000, //30 days in mS
@@ -27,7 +29,7 @@ app.use(passport.session())
 // app.use(bodyParser.urlencoded({extended:true})) //need this for un/pw form data to work - include as middleware in route
 app.use(bodyParser.json())
 //this must be added before routes
-app.use(AWSXRay.express.openSegment('TrailFinder'))
+// app.use(AWSXRay.express.openSegment('TrailFinder'))
 
 
 require('./routes/authRoutes')(app)
@@ -48,6 +50,6 @@ if(process.env.NODE_ENV==='production'){
 }
 
 //this must be added after routes
-app.use(AWSXRay.express.closeSegment())
+// app.use(AWSXRay.express.closeSegment())
 
-app.listen(PORT)
+app.listen(PORT, ()=>{console.log("Server listening on port " + PORT)})
