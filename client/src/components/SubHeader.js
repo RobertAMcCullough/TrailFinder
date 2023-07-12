@@ -27,7 +27,7 @@ class SubHeader extends React.Component {
         const options = [
             {key: 'length', value: 'length', text: 'Distance'},
             {key: 'stars', value: 'stars', text: 'Rating'},
-            {key: 'difficulty', value: 'difficulty', text: 'Difficulty'},
+            // {key: 'difficulty', value: 'difficulty', text: 'Difficulty'},
             {key: 'name', value: 'name', text: 'Name'}
         ]
 

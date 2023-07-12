@@ -4,18 +4,16 @@ class DifficultyLabel extends React.Component {
 
     convertLabel(){
         switch(this.props.difficulty) {
-            case ('green'):
-                return({label:'Easy',color:'green'})
-            case ('greenBlue'):
-                return({label:'Easy',color:'green'})
-            case ('blue'):
+            case ('Beginner'):
+                return({label:'Beginner',color:'green'})
+            case ('Intermediate'):
                 return({label:'Intermediate',color:'blue'})
-            case ('blueBlack'):
-                return({label:'Intermediate',color:'blue'})
-            case ('black'):
-                return({label:'Difficult',color:'black'})
+            case ('Advanced'):
+                return({label:'Advanced',color:'black'})
+            case (''):
+                return({label:'Beginner',color:'green'})
             default:
-                return({label:'Loading',color:'white'})
+                return({label:this.props.difficulty,color:'green'})
         }
     }
 

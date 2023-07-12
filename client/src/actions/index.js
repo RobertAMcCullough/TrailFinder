@@ -1,4 +1,5 @@
 import axios from 'axios'
+import convertTrail from '../helpers/convertTrails';
 
 import { FETCH_USER, SEARCH_TRAILS, TOGGLE_WISHLIST, TOGGLE_COMPLETE, SORT_TRAILS, FETCH_TRAIL, OPEN_MODAL, REFRESH_MAP, INFO_WINDOW, EXTENDED_INFO, SCREEN_RESIZE } from './types'
 
@@ -31,18 +32,23 @@ export const searchTrails = async (num=10) => {
     const lat = localStorage.getItem('lat')
     const lng = localStorage.getItem('lng')
 
-    if(status!=="OK"){
-        return({
-            payload: null,
-            type: SEARCH_TRAILS
+    const rapidApiTrailList = await axios.get(`/api/trails?lat=${lat}&lon=${lng}`)
+        
+    const trailList = {
+        data: {
+             trails: []
+        }
+    }
+
+    if (rapidApiTrailList.data) {
+        rapidApiTrailList.data.forEach((t) => {
+            trailList.data.trails.push(convertTrail(t));
         })
     }
-        
-    const trailList = await axios.get(`https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${lng}&maxResults=${num}&maxDistance=10&key=${process.env.REACT_APP_hikingProjectAPIKey}`)
     
     //prevents screen that says "no results for..." for several seconds after doing a second search, when the first search had no results
     trailList.data.trails.length===0 ? localStorage.setItem('trailResults','false') : localStorage.setItem('trailResults','true')
-
+    
     return({
         payload: trailList,
         type: SEARCH_TRAILS
@@ -111,10 +117,24 @@ export const sortBy = (sortBy) => {
 
 //fetches one trail
 export const fetchTrail = async (id) => {
-    const trail = axios.get(`https://www.hikingproject.com/data/get-trails-by-id?ids=${id}&key=${process.env.REACT_APP_hikingProjectAPIKey}`)
+    const trailList = {
+        data: {
+             trails: []
+        }
+    }
+
+    const lat = localStorage.getItem('lat')
+    const lng = localStorage.getItem('lng')
+
+    // used to make call to "https://www.hikingproject.com/data/get-trails-by-id?ids=${id}", now just find trail and r
+    const rapidApiTrailList = await axios.get(`/api/trails?lat=${lat}&lon=${lng}&id=${id}`)
+
+    if (rapidApiTrailList.data) {
+       trailList.data.trails.push(convertTrail(rapidApiTrailList.data.filter((t) => t.id == id)[0]));
+    }
 
     return({
-        payload: trail,
+        payload: trailList,
         type: FETCH_TRAIL
     })
 }

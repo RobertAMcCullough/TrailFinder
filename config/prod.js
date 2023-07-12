@@ -7,5 +7,6 @@ module.exports = {
     facebookAppId: process.env.facebookAppId,
     facebookSecret: process.env.facebookSecret,
     twitterAppId: process.env.twitterAppId,
-    twitterSecret: process.env.twitterSecret
+    twitterSecret: process.env.twitterSecret,
+    XRapidAPIKey: process.env.XRapidAPIKey,
 }
