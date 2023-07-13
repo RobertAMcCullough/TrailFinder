@@ -15,7 +15,7 @@ export default (trail) => {
     convertedTrail.low = 8240;
     convertedTrail.conditionStatus = 'Good';
     convertedTrail.latitude = trail.lat;
-    convertedTrail.longitude = trail.long;
+    convertedTrail.longitude = trail.lon;
     convertedTrail.imgSmallMed = trail.thumbnail;
     convertedTrail.imgMedium= trail.thumbnail;
 
